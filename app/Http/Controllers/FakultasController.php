@@ -10,7 +10,7 @@ class FakultasController extends Controller
 {
     public function find_prodi()
     {
-        $fakultas = Fakultas::with(['program_studis'])->findOrFail(request()->id);
+        $fakultas = Fakultas::findOrFail(request()->id);
 
         $prodi = $fakultas->program_studis;
 

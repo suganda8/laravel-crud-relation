@@ -56,21 +56,26 @@ Create
     $(document).ready(function() {
         $(document).on('change', '#fakultas_id', function() {
             var id = $(this).val();
-            $.ajax({
-                type: "get",
-                url: "{{route('find_prodi')}}",
-                data: {
-                    'id': id
-                },
-                success: function(data) {
-                    console.log(data);
-                    $("#program_studis_id").empty();
-                    $("#program_studis_id").append('<option selected>Pilih</option>');
-                    for (var i = 0; i < data.length; i++) {
-                        $("#program_studis_id").append('<option value="' + data[i].id + '">' + data[i].nama + '</option>');
-                    };
-                },
-            })
+
+            if (id > 0) {
+                $.ajax({
+                    type: "get",
+                    url: "{{route('find_prodi')}}",
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $("#program_studis_id").empty();
+                        $("#program_studis_id").append('<option selected>Pilih</option>');
+                        for (var i = 0; i < data.length; i++) {
+                            $("#program_studis_id").append('<option value="' + data[i].id + '">' + data[i].nama + '</option>');
+                        };
+                    },
+                })
+            } else {
+                $("#program_studis_id").empty();
+            }
         })
     });
 </script>

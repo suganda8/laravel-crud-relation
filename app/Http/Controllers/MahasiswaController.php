@@ -11,11 +11,13 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswas = Mahasiswa::with(['fakultas', 'program_studis'])->get();
-
-        // dd($mahasiswas);
+        if (request()->has('search')) {
+            $mahasiswas = Mahasiswa::where('nama', 'LIKE', '%'.request()->search.'%')->paginate(1);
+        } else {
+            $mahasiswas = Mahasiswa::paginate(1);
+        }
         
-        return view('pages.home', ['mahasiswas' => $mahasiswas]);
+        return view('pages.index', ['mahasiswas' => $mahasiswas]);
     }
 
     public function create()
