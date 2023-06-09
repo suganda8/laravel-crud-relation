@@ -39,7 +39,7 @@ Home
             <tbody>
                 @foreach($mahasiswas as $key => $mhs)
                 <tr>
-                    <td>{{$key+1}}</td>
+                    <td>{{$key + $mahasiswas->firstItem()}}</td>
                     <td>{{$mhs->nama}}</td>
                     <td>{{$mhs->nbi}}</td>
                     <td>{{$mhs->fakultas->nama}}</td>
